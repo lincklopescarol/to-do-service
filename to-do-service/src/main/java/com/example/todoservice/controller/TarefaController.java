@@ -28,6 +28,12 @@ public class TarefaController {
 
     @PostMapping("/adicionar")
     public ResponseEntity<String> adicionarTarefa(@RequestBody Tarefa tarefa) {
+        if (tarefa.getDescricao() == null) {
+            throw new DescricaoTarefaNulaException("A descrição da tarefa não pode ser nula.");
+        }
+        if (tarefa.getDataVencimento() == null) {
+            throw new DataVencimentoNulaException("A data de vencimento não pode ser nula.");
+        }
         try {
             tarefaService.adicionarTarefa(tarefa);
             return ResponseEntity.status(HttpStatus.CREATED).body("Tarefa adicionada.");
@@ -57,4 +63,15 @@ public class TarefaController {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Tarefa não encontrada.");
         }
     }
+
+    @ExceptionHandler(DescricaoTarefaNulaException.class)
+    public ResponseEntity<String> handleDescricaoTarefaNulaException(DescricaoTarefaNulaException exception) {
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(exception.getMessage());
+    }
+
+    @ExceptionHandler(DataVencimentoNulaException.class)
+    public ResponseEntity<String> handleDataVencimentoNulaException(DataVencimentoNulaException exception) {
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(exception.getMessage());
+    }
 }
+
