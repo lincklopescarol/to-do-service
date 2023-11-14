@@ -1,11 +1,16 @@
 package com.example.todoservice;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.time.LocalDateTime;
 
 public class Tarefa {
     private int id;
+    @NotNull
     private String descricao;
+    @NotNull
     private LocalDateTime dataVencimento;
+    @NotNull
     private boolean estado;
 
     public Tarefa(int id, String descricao, LocalDateTime dataVencimento) {
