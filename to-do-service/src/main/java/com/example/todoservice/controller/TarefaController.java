@@ -1,7 +1,7 @@
 package com.example.todoservice.controller;
 
 import com.example.todoservice.Tarefa;
-import com.example.todoservice.service.TarefaService; // Importe a classe de serviço.
+import com.example.todoservice.service.TarefaService; 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
